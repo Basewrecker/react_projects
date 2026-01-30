@@ -21,11 +21,11 @@ const Rating = ({
   };
 
   // Close modal and reset UI
-  const closeModal = () => {
-    setSubmitted(false);
-    setRating(0);
-    setHover(0);
-  };
+    const closeModal = () => {
+        setSubmitted(false);
+        setRating(0);
+        setHover(0);
+    }
 
   return (
     <div className='rating-container'>
@@ -46,7 +46,21 @@ const Rating = ({
       </div>
       {rating > 0 && <p className='feedback'>{feedbackMessages[rating - 1]}</p>}
       
-      <button>Submit</button>
+      <button className = "submit-btn" onClick = {handleSubmit} disabled = {rating === 0} >Submit</button>
+      
+      
+      {
+        submitted && (
+            <div className = "modal-overlay">
+                <div className = "modal">
+                   <h2>Thank you</h2>
+                   <p>You rated us {rating} star {rating > 1 ? 's' : ''}</p>
+                   <button className = "close-btn" onClick = {closeModal}>Close</button>
+                </div>
+            </div>
+            
+        )      
+      }
 
 
 
