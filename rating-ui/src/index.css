@@ -47,3 +47,66 @@ body {
     color: #333;
 }
 
+.submit-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+.submit-btn:disabled {
+    background-color: gray; 
+    cursor: none;
+}
+
+.submit-btn:hover:not(:disabled) {
+     background-color: #0056b3;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.modal h2 {
+    margin-bottom: 15px;
+}
+
+.close-btn {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+
+
+
+

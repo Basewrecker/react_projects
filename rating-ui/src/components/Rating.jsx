@@ -45,6 +45,8 @@ const Rating = ({
         ))}
       </div>
       {rating > 0 && <p className='feedback'>{feedbackMessages[rating - 1]}</p>}
+      
+      <button>Submit</button>
 
 
 
