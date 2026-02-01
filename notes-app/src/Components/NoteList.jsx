@@ -10,7 +10,10 @@ const NoteList = ({notes, deleteNote}) => {
     return (
        <div className = "space-y-4">
            {notes.map((note) => (
-                <div key={note.id} className = "p-4 bg-white rounded-lg shadow-md border-l-4">
+                <div key={note.id} className = "p-4 bg-white rounded-lg shadow-md border-l-4" style = {{
+                        borderLeftColour: note.priority === 'High' ? 'red' : note.priority === 'Medium' ? 'yellow' : 'green',
+                    }}
+                    >
                     <h3 className = "text-lg font-bold">
                         {note.title}
                     </h3>

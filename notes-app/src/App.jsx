@@ -7,7 +7,13 @@ const App = () => {
     
     const[notes, setNotes] = useState([]);
     
+    
     const deleteNote = (id) => {
+        const confirmDel = window.confirm("You sure you want to delete this note?");
+        
+        if (confirmDel) {
+            setNotes(notes.filter((note) => note.id !== id));
+        }
         setNotes(notes.filter((note) => note.id !== id));
     }
     
