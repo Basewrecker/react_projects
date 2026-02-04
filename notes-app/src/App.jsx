@@ -15,6 +15,9 @@ const App = () => {
     }, [notes])
     
     
+    
+    
+    
     const deleteNote = (id) => {
         const confirmDel = window.confirm("You sure you want to delete this note?");
         
