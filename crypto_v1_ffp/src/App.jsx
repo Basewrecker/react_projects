@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import CoinCard from "./components/CoinCard.jsx"
-const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const App = () => {
     
@@ -9,7 +9,7 @@ const App = () => {
     const [error, setError] = useState(null);
     
     useEffect(() => {
-        fetch(API_URL)
+        fetch(`${API_URL}&order=market_cap_desc&per_page=10&page=1&sparkline=false`)
           .then((res) => {
             if(!res.ok) throw new Error('Failed to fetch data');
             return res.json();
