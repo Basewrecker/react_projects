@@ -6,8 +6,8 @@ const app = express();
 
 app.use(cors());
 
-// Proxy endpoint
-app.get("/api/coins", async (req, res) => {
+
+app.get('/api/coins', async (req, res) => {
   try {
     const limit = req.query.limit || 10;
 
@@ -15,24 +15,27 @@ app.get("/api/coins", async (req, res) => {
       "https://api.coingecko.com/api/v3/coins/markets",
       {
         params: {
-          vs_currency: "usd",
-          order: "market_cap_desc",
+          vs_currency: 'usd',
+          order: 'market_cap_desc',
           per_page: limit,
           page: 1,
-          sparkline: false,
-        },
+          sparkline: false
+        }
       }
     );
 
     res.json(response.data);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: "API failed" });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: "failed" });
   }
 });
 
 
-
 app.listen(PORT, () => {
-  console.log(`Proxy running on port ${PORT}`);
-});
+    console.log(`proxy server now running on ${PORT}`);
+})
+
+
+
