@@ -10,7 +10,7 @@ const App = () => {
     const [limit, setLimit] = useState(20);
     
     useEffect(() => {
-        fetch(`${API_URL}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false`)
+        fetch(`/api/coins?limit=${limit}`)
           .then((res) => {
             if(!res.ok) throw new Error('Failed to fetch data');
             return res.json();
