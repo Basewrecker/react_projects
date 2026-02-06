@@ -7,9 +7,10 @@ const App = () => {
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [limit, setLimit] = useState(20);
     
     useEffect(() => {
-        fetch(`${API_URL}&order=market_cap_desc&per_page=10&page=1&sparkline=false`)
+        fetch(`${API_URL}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false`)
           .then((res) => {
             if(!res.ok) throw new Error('Failed to fetch data');
             return res.json();
@@ -20,16 +21,29 @@ const App = () => {
             setLoading(false);
         })
         .catch((error) => {
-            setError(err.message);
+            setError(error.message);
             setLoading(false);
         })
-    }, []);
+    }, [limit]);
     
     return (
     <div>
         <h1>🚀 Crypto</h1>
         {loading && <p>Loading</p>}
         {error && <div className = "error">{error} </div> }
+        
+        <div className="controls">
+            <label htmlFor="limit">
+                Show:
+            </label>
+            <select id="limit" value = {limit} onChange = {(event) => setLimit(Number(event.target.value))}>
+               <option value="5">5</option>
+               <option value="10">10</option>
+               <option value="20">20</option>
+               <option value="50">50</option>
+               <option value="100">100</option>
+            </select>
+        </div>
     
         
     {!loading && !error && (
