@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import CoinCard from "./components/CoinCard.jsx"
-const API_URL = import.meta.env.VITE_API_URL;
 
 const App = () => {
     
@@ -13,6 +12,7 @@ const App = () => {
         fetch(`/api/coins?limit=${limit}`)
           .then((res) => {
             if(!res.ok) throw new Error('Failed to fetch data');
+            console.log(res);
             return res.json();
         })
         .then((data) => {
