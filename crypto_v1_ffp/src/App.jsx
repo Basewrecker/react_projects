@@ -30,7 +30,10 @@ const App = () => {
     }, [limit]);
     
     const filteredCoins = coins.filter((coin) => {
-        return coin.name.toLowerCase().includes(filter.toLocaleLowerCase())
+        return (
+            coin.name.toLowerCase().includes(filter.toLowerCase()) 
+            || coin.symbol.toLowerCase().includes(filter.lowercase())
+          )
     });
     
     return (
@@ -49,7 +52,7 @@ const App = () => {
         
     {!loading && !error && (
      <main className = "grid">
-         {coins.map((coin) => (
+         {filteredCoins.map((coin) => (
         
           <CoinCard key = {coin.id} coin = {coin} />
          ))} 
