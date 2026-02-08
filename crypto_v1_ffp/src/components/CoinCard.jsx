@@ -1,7 +1,7 @@
 const CoinCard = ({coin}) => {
     return ( <div className = "coin-card">
              <div className = "coin-header">
-                 <img src={coin.image} alt={coin.name} class = "coin-image"/>
+                 <img src={coin.image} alt={coin.name} className="coin-image" />
                  <div>
                      <h2>
                          {coin.name}
@@ -12,13 +12,13 @@ const CoinCard = ({coin}) => {
                  </div>
              </div>
              <p>
-               Price: ${coin.current_price.toLocaleString()}  
+               Price: ${coin.current_price != null ? coin.current_price.toLocaleString() : 'N/A'}
              </p>
-             <p className = {coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'}>
-                 {coin.price_change_percentage_24h.toFixed(2)}%
+             <p className = {coin.price_change_percentage_24h != null && coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'}>
+                 {coin.price_change_percentage_24h != null ? `${coin.price_change_percentage_24h.toFixed(2)}%` : 'N/A'}
              </p>
              <p>
-                Market cap: {coin.market_cap.toLocaleString()}
+                Market cap: {coin.market_cap != null ? coin.market_cap.toLocaleString() : 'N/A'}
              </p>
          </div>);
 }
