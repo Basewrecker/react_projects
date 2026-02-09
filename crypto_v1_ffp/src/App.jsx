@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import { Routes, Route } from "react-router-dom"; 
 import HomePage from "./pages/home.jsx";
 import AboutPage from "./pages/about.jsx";
+import Header from "./components/Header.jsx";
 const App = () => {
     
     const [coins, setCoins] = useState([]);
@@ -30,6 +31,7 @@ const App = () => {
     }, [limit]);
     
     return (
+        <><Header />
   <Routes>
     <Route
       path="/"
@@ -49,6 +51,7 @@ const App = () => {
     />
     <Route path = "/about" element = {<AboutPage />}/>
   </Routes>
+        </>
 );
 
 };
