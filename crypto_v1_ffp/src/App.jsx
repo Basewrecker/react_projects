@@ -47,6 +47,7 @@ const App = () => {
         />
       }
     />
+    <Route path = "/about" element = {<AboutPage />}/>
   </Routes>
 );
 
