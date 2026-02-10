@@ -53,6 +53,32 @@ const CoinDetailsPage = () => {
                     <h3>
                         Current Price: {coin.market_data.current_price.usd}
                     </h3>
+                    <h4>
+                        Market Cap: {coin.market_data.market_cap.usd}
+                    </h4>
+                    <h4>
+                        24h High: ${coin.market_data.high_24h.usd}
+                    </h4>
+                    <h4>
+                        24h Low: ${coin.market_data.low_24h.usd}
+                    </h4>
+                    <h4>
+                        24h Price Change: ${coin.market_data.price_change_24h.toFixed(8)}{' To '}{coin.market_data.price_change_percentage_24h.toFixed(8)}
+                    </h4>
+                    <h4>
+                        Circulating Supply: ${coin.market_data.circulating_supply.toLocaleString(10)}
+                    </h4>
+                    <h4>
+                        Total Supply: ${coin.market_data.total_supply.toLocaleString(10) || ''}
+                    </h4>
+                    <h4>
+                        All-Time High: ${coin.market_data.ath.usd}
+                        {''} on {coin.market_data.ath_date.usd}
+                    </h4>
+                    <h4>
+                        All-Time Low: ${coin.market_data.atl.usd.toFixed(10)}
+                        {''} on {coin.market_data.atl_date.usd}
+                    </h4>
                 </div>
               </>
             )}
