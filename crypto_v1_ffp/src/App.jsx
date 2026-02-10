@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/home.jsx";
 import AboutPage from "./pages/about.jsx";
 import NotFoundPage from "./pages/not-found.jsx";
+import CoinDetailsPage from "./pages/coin-details.jsx";
 import Header from "./components/Header.jsx";
 const App = () => {
     
@@ -51,6 +52,7 @@ const App = () => {
       }
     />
     <Route path = "/about" element = {<AboutPage />}/>
+    <Route path = "/coin/:id" element = {<CoinDetailsPage />}/>
     <Route path = "*" element = {<NotFoundPage />}/>
   </Routes>
         </>
