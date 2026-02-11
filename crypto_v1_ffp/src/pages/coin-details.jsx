@@ -99,10 +99,13 @@ const CoinDetailsPage = () => {
                         
                        
                     )}
-                    {coin.categories.length}
+                    {coin.categories.length > 0 && (
+                    
+                      <p>Categories: {coin.categories.join(', ')}</p>
+                    )}
                 </div>
                 
-                
+                {!loading && !error && !coin && <p>No data found, please try again.</p>}
               </>
             )}
       </div>
