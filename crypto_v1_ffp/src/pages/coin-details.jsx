@@ -79,7 +79,30 @@ const CoinDetailsPage = () => {
                         All-Time Low: ${coin.market_data.atl.usd.toFixed(10)}
                         {''} on {coin.market_data.atl_date.usd}
                     </h4>
+                    <h4>
+                        Last Update: {new Date(coin.last_updated).toLocaleString()}
+                    </h4>
                 </div>
+                
+                <div className = "coin-details-link">
+                    {coin.links.homepage[0] && (
+                    <p>
+                        {''}
+                        <a href={coin.links.homepage[0]} target = "_blank">
+                            Website
+                        </a>
+                        <br/>
+                        <a href={coin.links.blockchain_site[0]} target = "_blank">
+                            Blockchain Explorer
+                        </a>
+                    </p>
+                        
+                       
+                    )}
+                    {coin.categories.length}
+                </div>
+                
+                
               </>
             )}
       </div>
