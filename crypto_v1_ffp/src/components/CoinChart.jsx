@@ -26,20 +26,22 @@ ChartJS.register(
 const API_URL = import.meta.env.VITE_COIN_API_URL;
 
 const CoinChart = ({coinId}) => {
-    const [chartDate, setChartData] = useState(null);
+    const [chartData, setChartData] = useState(null);
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         const fetchPrices = async () => {
-            const res = await fetch(`$(API_URL)/${coinId}/market_chart?vs_currency=usd&days=7`);
-            
+            const res = await fetch(
+              `${API_URL}/${coinId}/market_chart?vs_currency=usd&days=7`
+            );
+
             const data = await res.json();
-            
+
             const prices = data.prices.map((price) => ({
                 x: price[0],
                 y: price[1]
             }));
-            
+
             setChartData({
                 datasets: [
                     {
@@ -53,17 +55,47 @@ const CoinChart = ({coinId}) => {
                     }
                 ]
             });
-            
+
             setLoading(false);
-        }
-        
+        };
+
         fetchPrices();
     }, [coinId]);
-    
+
+    if (loading || !chartData) {
+        return <div style={{ marginTop: '30px' }}>Loading chart...</div>;
+    }
+
     return (
-      <div>
-          
-        </div>
+      <div style = {{marginTop: '30px'}}>
+          <Line
+             data = {chartData}
+             options = {{
+                    responsive: true,
+                        plugins: {
+                            legend: {display: false},
+                            tooltip: {mode: 'index', intersect: false}
+                        },
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                },
+                                ticks: {
+                                    autoSkip: true,
+                                    maxTicksLimit: 7
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    callback: (value) => `$${value.toLocaleString()}`
+                                }
+                            }
+                        }
+                }}
+             />
+      </div>
     );
 }
 
