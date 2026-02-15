@@ -52,6 +52,15 @@ const Header = () => {
                                </li>
                               ))}
                           </ul>
+                          
+                          <div className = "mt-4 flex justify-between font-semibold">
+                            <span>
+                                Total:
+                            </span>
+                            <span>
+                                ${total}
+                            </span>
+                          </div>
                           </>) }
                   </div>
                </div>
