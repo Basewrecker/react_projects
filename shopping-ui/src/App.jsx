@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import ProductList from "./components/ProductList.jsx";
 
 const App = () => {
     const [products, setProdcuts] = useState([]);
@@ -11,7 +12,6 @@ const App = () => {
                 const res = await fetch('http://localhost:8000/products')
                 if (!res.ok) throw new Error('Failed to fetch data')
                 const data = await res.json();
-                console.log(data)
                 setProdcuts(data);
             } catch (error) {
                 setError(error.message);
@@ -32,22 +32,7 @@ const App = () => {
        {loading && <p>Loading..</p>}
        {error && <div className = "error">❌ {error} </div>}
        
-       <div className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-           {products.map((product) => (
-             <div key = {product.id} className = "bg-white rounded-lg shadow p-4 flex flex-col">
-               <img src={product.image} alt={product.name} className = "h-40 object-cover rounded mb-4"/>
-               <h2 className = "text-xl font-semibold">
-                   {product.name}
-               </h2>
-               <p className = "text-gray-500 text-sm mb-2">
-                    {product.description}
-               </p>
-               <p className = "font-bold text-lg">
-                  ${product.price}
-               </p>
-             </div>
-           ))}
-       </div>
+       <ProductList products = {products}/>
     </div>
     );
 };
