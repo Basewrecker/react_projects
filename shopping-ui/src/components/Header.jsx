@@ -5,7 +5,7 @@ import {useCart} from "../context/CartContext";
 const Header = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     
-    const {cart} = useCart();
+    const {cart, removeFromCart, clearCart} = useCart();
     const itemCount = cart.reduce((acc, item) => acc + item.qty, 0);
     const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2);
     
@@ -33,6 +33,9 @@ const Header = () => {
                       <h2 className = "font-semibold text-lg mb-2">
                           Cart Items
                       </h2>
+                      <button className = "text-sm text-gray-500 mb-3 cursor-pointer hover:underline duration-200" onClick = {clearCart}>
+                          Clear
+                      </button>
                       {cart.length === 0 ? (
                         <p className = "text-gray-500 text-sm">
                             Your cart is empty
@@ -49,6 +52,9 @@ const Header = () => {
                                            {item.qty} x ${item.price}
                                        </p>
                                    </div>
+                                   <button className = "text-sm text-red-500 hover:underline cursor-pointer" onClick = {(id) => removeFromCart(item.id)}>
+                                       Remove
+                                   </button>
                                </li>
                               ))}
                           </ul>
