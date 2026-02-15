@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {useState, useEffect} from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [products, setProdcuts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch('http://localhost:8000/products')
+                if (!res.ok) throw new Error('Failed to fetch data')
+                const data = await res.json();
+                console.log(data)
+                setProdcuts(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        }
+        
+        fetchProducts();
+    }, [])
+    
+    return (
+    <div className = "min-h-screen bg-gray-100 p-6">
+       <h1 className = "text-3xl font-bold mb-6">
+           Product Catalog
+       </h1>
+       
+       {loading && <p>Loading..</p>}
+       {error && <div className = "error">❌ {error} </div>}
+       
+       <div className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+           {products.map((product) => (
+             <div key = {product.id} className = "bg-white rounded-lg shadow p-4 flex flex-col">
+               <img src={product.image} alt={product.name} className = "h-40 object-cover rounded mb-4"/>
+               <h2 className = "text-xl font-semibold">
+                   {product.name}
+               </h2>
+               <p className = "text-gray-500 text-sm mb-2">
+                    {product.description}
+               </p>
+               <p className = "font-bold text-lg">
+                  ${product.price}
+               </p>
+             </div>
+           ))}
+       </div>
+    </div>
+    );
+};
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export default App;
